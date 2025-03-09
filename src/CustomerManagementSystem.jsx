@@ -77,15 +77,6 @@ export default function CustomerManagementSystem() {
     }
   }, [sortConfig]);
 
-  // Format number with comma separators
-  const formatAmount = (amount) => {
-    if (!amount) return "-";
-    return `₹${parseFloat(amount).toLocaleString("en-IN", {
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    })}`;
-  };
-
   // Handle input changes in the form
   const handleInputChange = (field, event) => {
     setFormData({ ...formData, [field]: event.target.value });
@@ -316,67 +307,71 @@ export default function CustomerManagementSystem() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="bg-gradient-to-r from-blue-700 to-purple-800 p-6 shadow-lg">
+      <div className="bg-gradient-to-r from-blue-700 to-purple-800 p-4 md:p-6 shadow-lg">
         <div className="max-w-6xl mx-auto">
-          <h1 className="text-3xl font-bold text-white">
+          <h1 className="text-2xl md:text-3xl font-bold text-white">
             Customer Management System
           </h1>
-          <p className="text-blue-100 mt-2">
+          <p className="text-blue-100 mt-1 md:mt-2 text-sm md:text-base">
             Manage your customers and track purchases efficiently
           </p>
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 py-6">
+      <div className="max-w-6xl mx-auto px-4 py-4 md:py-6">
         {/* Dashboard Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-          <div className="bg-white rounded-lg shadow p-4 border-l-4 border-blue-500">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-4 md:mb-6">
+          <div className="bg-white rounded-lg shadow p-3 md:p-4 border-l-4 border-blue-500">
             <div className="flex items-center">
-              <div className="p-3 rounded-full bg-blue-100 text-blue-600 mr-4">
-                <Users size={24} />
+              <div className="p-2 md:p-3 rounded-full bg-blue-100 text-blue-600 mr-2 md:mr-4">
+                <Users size={20} md:size={24} />
               </div>
               <div>
-                <p className="text-sm text-gray-500">Total Customers</p>
-                <p className="text-xl font-semibold">
+                <p className="text-xs md:text-sm text-gray-500">
+                  Total Customers
+                </p>
+                <p className="text-lg md:text-xl font-semibold">
                   {dashboardStats.totalCustomers}
                 </p>
               </div>
             </div>
           </div>
-          <div className="bg-white rounded-lg shadow p-4 border-l-4 border-green-500">
+          <div className="bg-white rounded-lg shadow p-3 md:p-4 border-l-4 border-green-500">
             <div className="flex items-center">
-              <div className="p-3 rounded-full bg-green-100 text-green-600 mr-4">
-                <DollarSign size={24} />
+              <div className="p-2 md:p-3 rounded-full bg-green-100 text-green-600 mr-2 md:mr-4">
+                <DollarSign size={20} md:size={24} />
               </div>
               <div>
-                <p className="text-sm text-gray-500">Total Sales</p>
-                <p className="text-xl font-semibold">
-                  {formatAmount(dashboardStats.totalSales)}
+                <p className="text-xs md:text-sm text-gray-500">Total Sales</p>
+                <p className="text-lg md:text-xl font-semibold">
+                  ₹{dashboardStats.totalSales.toFixed(2)}
                 </p>
               </div>
             </div>
           </div>
-          <div className="bg-white rounded-lg shadow p-4 border-l-4 border-red-500">
+          <div className="bg-white rounded-lg shadow p-3 md:p-4 border-l-4 border-red-500">
             <div className="flex items-center">
-              <div className="p-3 rounded-full bg-red-100 text-red-600 mr-4">
-                <Calendar size={24} />
+              <div className="p-2 md:p-3 rounded-full bg-red-100 text-red-600 mr-2 md:mr-4">
+                <Calendar size={20} md:size={24} />
               </div>
               <div>
-                <p className="text-sm text-gray-500">Due Amounts</p>
-                <p className="text-xl font-semibold">
-                  {formatAmount(dashboardStats.totalDueAmount)}
+                <p className="text-xs md:text-sm text-gray-500">Due Amounts</p>
+                <p className="text-lg md:text-xl font-semibold">
+                  ₹{dashboardStats.totalDueAmount.toFixed(2)}
                 </p>
               </div>
             </div>
           </div>
-          <div className="bg-white rounded-lg shadow p-4 border-l-4 border-amber-500">
+          <div className="bg-white rounded-lg shadow p-3 md:p-4 border-l-4 border-amber-500">
             <div className="flex items-center">
-              <div className="p-3 rounded-full bg-amber-100 text-amber-600 mr-4">
-                <Package size={24} />
+              <div className="p-2 md:p-3 rounded-full bg-amber-100 text-amber-600 mr-2 md:mr-4">
+                <Package size={20} md:size={24} />
               </div>
               <div>
-                <p className="text-sm text-gray-500">Total Products</p>
-                <p className="text-xl font-semibold">
+                <p className="text-xs md:text-sm text-gray-500">
+                  Total Products
+                </p>
+                <p className="text-lg md:text-xl font-semibold">
                   {dashboardStats.totalProducts}
                 </p>
               </div>
@@ -385,13 +380,13 @@ export default function CustomerManagementSystem() {
         </div>
 
         {/* Search and Actions Bar */}
-        <div className="bg-white p-4 rounded-lg shadow-md mb-6">
-          <div className="flex flex-col md:flex-row gap-4">
-            <div className="flex-grow flex gap-2">
+        <div className="bg-white p-3 md:p-4 rounded-lg shadow-md mb-4 md:mb-6">
+          <div className="flex flex-col md:flex-row gap-3 md:gap-4">
+            <div className="flex-grow flex flex-col md:flex-row gap-2">
               <div className="relative flex-grow">
-                <div className="flex">
+                <div className="flex flex-col md:flex-row">
                   <select
-                    className="bg-gray-50 border border-r-0 border-gray-300 rounded-l px-3 py-2"
+                    className="bg-gray-50 border border-r-0 border-gray-300 rounded-t md:rounded-l md:rounded-r-none px-3 py-2 w-full md:w-auto"
                     value={searchField}
                     onChange={(e) => setSearchField(e.target.value)}
                   >
@@ -400,7 +395,7 @@ export default function CustomerManagementSystem() {
                     <option value="contact">Phone</option>
                   </select>
                   <input
-                    className="flex-grow bg-gray-50 border border-gray-300 px-3 py-2"
+                    className="flex-grow bg-gray-50 border border-gray-300 px-3 py-2 w-full md:w-auto rounded-b md:rounded-r md:rounded-l-none"
                     placeholder={`Search by ${searchField
                       .replace(/([A-Z])/g, " $1")
                       .toLowerCase()}`}
@@ -409,15 +404,16 @@ export default function CustomerManagementSystem() {
                     onKeyPress={(e) => e.key === "Enter" && handleSearch()}
                   />
                   <button
-                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-r transition-colors flex items-center"
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-r transition-colors flex items-center justify-center md:justify-start"
                     onClick={handleSearch}
                   >
-                    <Search size={16} className="mr-1" /> Search
+                    <Search size={16} className="mr-1" />{" "}
+                    <span className="hidden md:inline">Search</span>
                   </button>
                 </div>
                 {search && (
                   <button
-                    className="absolute right-32 top-2 text-gray-400 hover:text-gray-600"
+                    className="absolute right-2 md:right-32 top-2 text-gray-400 hover:text-gray-600"
                     onClick={resetSearch}
                   >
                     <X size={18} />
@@ -425,13 +421,13 @@ export default function CustomerManagementSystem() {
                 )}
               </div>
             </div>
-            <div className="flex gap-2">
+            <div className="flex flex-col md:flex-row gap-2">
               <button
                 className={`${
                   showAddForm
                     ? "bg-red-600 hover:bg-red-700"
                     : "bg-green-600 hover:bg-green-700"
-                } text-white px-4 py-2 rounded transition-colors flex items-center`}
+                } text-white px-4 py-2 rounded transition-colors flex items-center justify-center md:justify-start`}
                 onClick={() => {
                   setShowAddForm(!showAddForm);
                   if (showHistory) resetHistoryView();
@@ -449,7 +445,7 @@ export default function CustomerManagementSystem() {
                   showHistory
                     ? "bg-purple-700 hover:bg-purple-800"
                     : "bg-purple-600 hover:bg-purple-700"
-                } text-white px-4 py-2 rounded transition-colors flex items-center`}
+                } text-white px-4 py-2 rounded transition-colors flex items-center justify-center md:justify-start`}
                 onClick={() => {
                   if (showHistory) {
                     resetHistoryView();
@@ -462,7 +458,7 @@ export default function CustomerManagementSystem() {
                 {showHistory ? "Exit History" : "History"}
               </button>
               <button
-                className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded transition-colors flex items-center"
+                className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded transition-colors flex items-center justify-center md:justify-start"
                 onClick={clearAllData}
               >
                 <Trash2 size={16} className="mr-1" /> Clear
@@ -473,45 +469,20 @@ export default function CustomerManagementSystem() {
 
         {/* Add Customer Form */}
         {showAddForm && (
-          <div className="bg-white p-6 rounded-lg shadow-md mb-6 border-l-4 border-blue-500 animate-fadeIn">
-            <h2 className="text-xl font-semibold mb-4 text-gray-800 flex items-center">
+          <div className="bg-white p-4 md:p-6 rounded-lg shadow-md mb-4 md:mb-6 border-l-4 border-blue-500 animate-fadeIn">
+            <h2 className="text-lg md:text-xl font-semibold mb-3 md:mb-4 text-gray-800 flex items-center">
               <Users size={20} className="mr-2" /> Add New Customer
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
               <div className="space-y-2">
                 <label className="block text-sm font-medium text-gray-700">
                   Customer Name*
                 </label>
                 <input
-                  className="w-full bg-gray-50 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full bg-gray-50 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-500"
                   type="text"
                   value={formData.customerName}
                   onChange={(e) => handleInputChange("customerName", e)}
-                  placeholder="Enter customer name"
-                  required
-                />
-              </div>
-              <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-700">
-                  Phone Number
-                </label>
-                <input
-                  className="w-full bg-gray-50 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  type="tel"
-                  value={formData.contact}
-                  onChange={(e) => handleInputChange("contact", e)}
-                  placeholder="Enter phone number"
-                />
-              </div>
-              <div className="space-y-2">
-                <label className="block text-sm font-medium text-gray-700">
-                  Purchase Date
-                </label>
-                <input
-                  className="w-full bg-gray-50 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  type="date"
-                  value={formData.date}
-                  onChange={(e) => handleInputChange("date", e)}
                 />
               </div>
               <div className="space-y-2">
@@ -519,270 +490,142 @@ export default function CustomerManagementSystem() {
                   Product Name*
                 </label>
                 <input
-                  className="w-full bg-gray-50 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full bg-gray-50 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-500"
                   type="text"
                   value={formData.productName}
                   onChange={(e) => handleInputChange("productName", e)}
-                  placeholder="Enter product name"
-                  required
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-700">
+                  Contact
+                </label>
+                <input
+                  className="w-full bg-gray-50 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-500"
+                  type="text"
+                  value={formData.contact}
+                  onChange={(e) => handleInputChange("contact", e)}
                 />
               </div>
               <div className="space-y-2">
                 <label className="block text-sm font-medium text-gray-700">
                   Product Amount
                 </label>
-                <div className="relative">
-                  <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
-                    ₹
-                  </span>
-                  <input
-                    className="w-full bg-gray-50 border border-gray-300 rounded pl-8 pr-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    type="number"
-                    value={formData.productAmount}
-                    onChange={(e) => handleInputChange("productAmount", e)}
-                    placeholder="0.00"
-                    min="0"
-                    step="0.01"
-                  />
-                </div>
+                <input
+                  className="w-full bg-gray-50 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-500"
+                  type="text"
+                  value={formData.productAmount}
+                  onChange={(e) => handleInputChange("productAmount", e)}
+                />
               </div>
               <div className="space-y-2">
                 <label className="block text-sm font-medium text-gray-700">
                   Due Amount
                 </label>
-                <div className="relative">
-                  <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
-                    ₹
-                  </span>
-                  <input
-                    className="w-full bg-gray-50 border border-gray-300 rounded pl-8 pr-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    type="number"
-                    value={formData.dueAmount}
-                    onChange={(e) => handleInputChange("dueAmount", e)}
-                    placeholder="0.00"
-                    min="0"
-                    step="0.01"
-                  />
-                </div>
+                <input
+                  className="w-full bg-gray-50 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-500"
+                  type="text"
+                  value={formData.dueAmount}
+                  onChange={(e) => handleInputChange("dueAmount", e)}
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="block text-sm font-medium text-gray-700">
+                  Date
+                </label>
+                <input
+                  className="w-full bg-gray-50 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:border-blue-500"
+                  type="date"
+                  value={formData.date}
+                  onChange={(e) => handleInputChange("date", e)}
+                />
               </div>
             </div>
-            <div className="mt-6 flex justify-end">
-              <button
-                className="bg-gray-300 hover:bg-gray-400 text-gray-800 mr-2 px-4 py-2 rounded transition-colors"
-                onClick={() => setShowAddForm(false)}
-              >
-                Cancel
-              </button>
-              <button
-                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded transition-colors"
-                onClick={handleSubmit}
-              >
-                Save Customer
-              </button>
-            </div>
+            <button
+              className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded mt-4 transition-colors"
+              onClick={handleSubmit}
+            >
+              Submit
+            </button>
           </div>
         )}
 
-        {/* Customer Table */}
-        <div className="bg-white rounded-lg shadow-md overflow-hidden">
-          <div className="p-4 border-b border-gray-200 flex justify-between items-center">
-            <h2 className="text-xl font-semibold text-gray-800 flex items-center">
-              {showHistory ? (
-                <History size={20} className="mr-2" />
-              ) : (
-                <Users size={20} className="mr-2" />
-              )}
-              {showHistory ? "Customer History Records" : "Customer Details"}
-              <span className="ml-2 text-sm font-normal text-gray-500">
-                {filteredResults.length}{" "}
-                {filteredResults.length === 1 ? "record" : "records"} found
-              </span>
-            </h2>
-            {showHistory && (
-              <span className="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded">
-                Sorted by date (newest first)
-              </span>
-            )}
-          </div>
-
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    #
-                  </th>
-                  <th
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:text-gray-700"
-                    onClick={() => requestSort("customerName")}
-                  >
-                    <div className="flex items-center">
-                      Customer Name {getSortIndicator("customerName")}
-                    </div>
-                  </th>
-                  <th
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:text-gray-700"
-                    onClick={() => requestSort("productName")}
-                  >
-                    <div className="flex items-center">
-                      Product Name {getSortIndicator("productName")}
-                    </div>
-                  </th>
-                  <th
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:text-gray-700"
-                    onClick={() => requestSort("productAmount")}
-                  >
-                    <div className="flex items-center">
-                      Amount {getSortIndicator("productAmount")}
-                    </div>
-                  </th>
-                  <th
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:text-gray-700"
-                    onClick={() => requestSort("date")}
-                  >
-                    <div className="flex items-center">
-                      Date {getSortIndicator("date")}
-                    </div>
-                  </th>
-                  <th
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:text-gray-700"
-                    onClick={() => requestSort("dueAmount")}
-                  >
-                    <div className="flex items-center">
-                      Due Amount {getSortIndicator("dueAmount")}
-                    </div>
-                  </th>
-                  <th
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer hover:text-gray-700"
-                    onClick={() => requestSort("contact")}
-                  >
-                    <div className="flex items-center">
-                      Contact {getSortIndicator("contact")}
-                    </div>
-                  </th>
+        {/* Customer Data Table */}
+        <div className="bg-white rounded-lg shadow-md overflow-x-auto">
+          <table className="min-w-full table-auto">
+            <thead className="bg-gray-50">
+              <tr>
+                <th
+                  className="px-3 py-2 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider"
+                  onClick={() => requestSort("customerName")}
+                >
+                  Customer {getSortIndicator("customerName")}
+                </th>
+                <th
+                  className="px-3 py-2 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider"
+                  onClick={() => requestSort("productName")}
+                >
+                  Product {getSortIndicator("productName")}
+                </th>
+                <th
+                  className="px-3 py-2 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider"
+                  onClick={() => requestSort("contact")}
+                >
+                  Contact {getSortIndicator("contact")}
+                </th>
+                <th
+                  className="px-3 py-2 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider"
+                  onClick={() => requestSort("productAmount")}
+                >
+                  Amount {getSortIndicator("productAmount")}
+                </th>
+                <th
+                  className="px-3 py-2 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider"
+                  onClick={() => requestSort("dueAmount")}
+                >
+                  Due {getSortIndicator("dueAmount")}
+                </th>
+                <th
+                  className="px-3 py-2 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider"
+                  onClick={() => requestSort("date")}
+                >
+                  Date {getSortIndicator("date")}
+                </th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {currentItems.map((customer) => (
+                <tr key={customer.id}>
+                  <td className="px-3 py-2 whitespace-nowrap text-sm text-gray-500">
+                    {customer.customerName}
+                  </td>
+                  <td className="px-3 py-2 whitespace-nowrap text-sm text-gray-500">
+                    {customer.productName}
+                  </td>
+                  <td className="px-3 py-2 whitespace-nowrap text-sm text-gray-500">
+                    {customer.contact}
+                  </td>
+                  <td className="px-3 py-2 whitespace-nowrap text-sm text-gray-500">
+                    {customer.productAmount}
+                  </td>
+                  <td className="px-3 py-2 whitespace-nowrap text-sm text-gray-500">
+                    {customer.dueAmount}
+                  </td>
+                  <td className="px-3 py-2 whitespace-nowrap text-sm text-gray-500">
+                    {customer.date}
+                  </td>
                 </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {currentItems.length > 0 ? (
-                  currentItems.map((customer, index) => (
-                    <tr key={customer.id || index} className="hover:bg-gray-50">
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        {indexOfFirstItem + index + 1}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm font-medium text-gray-900">
-                          {customer.customerName}
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900">
-                          {customer.productName}
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900">
-                          {customer.productAmount
-                            ? formatAmount(customer.productAmount)
-                            : "-"}
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900">
-                          {customer.date || "-"}
-                        </div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div
-                          className={`text-sm ${
-                            parseFloat(customer.dueAmount) > 0
-                              ? "text-red-600 font-medium"
-                              : "text-gray-900"
-                          }`}
-                        >
-                          {customer.dueAmount
-                            ? formatAmount(customer.dueAmount)
-                            : "-"}
-                        </div>
-                        {parseFloat(customer.dueAmount) > 0 && (
-                          <span className="bg-red-100 text-red-800 text-xs font-medium mr-2 px-2 py-0.5 rounded">
-                            Due
-                          </span>
-                        )}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        {customer.contact || "-"}
-                      </td>
-                    </tr>
-                  ))
-                ) : (
-                  <tr>
-                    <td
-                      colSpan="7"
-                      className="px-6 py-10 text-center text-sm text-gray-500"
-                    >
-                      {search
-                        ? "No matching records found."
-                        : "No customer data available. Add a customer to get started."}
-                    </td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
-          </div>
-
-          {/* Pagination Controls */}
-          {filteredResults.length > itemsPerPage && (
-            <div className="bg-gray-50 px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
-              <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-                <div>
-                  <p className="text-sm text-gray-700">
-                    Showing{" "}
-                    <span className="font-medium">{indexOfFirstItem + 1}</span>{" "}
-                    to{" "}
-                    <span className="font-medium">
-                      {Math.min(indexOfLastItem, filteredResults.length)}
-                    </span>{" "}
-                    of{" "}
-                    <span className="font-medium">
-                      {filteredResults.length}
-                    </span>{" "}
-                    results
-                  </p>
-                </div>
-                <div>
-                  <nav
-                    className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px"
-                    aria-label="Pagination"
-                  >
-                    <button
-                      onClick={() => paginate(Math.max(1, currentPage - 1))}
-                      className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
-                      disabled={currentPage === 1}
-                    >
-                      <span className="sr-only">Previous</span>
-                      &laquo;
-                    </button>
-
-                    <div className="flex space-x-1 px-2">
-                      {renderPaginationButtons()}
-                    </div>
-
-                    <button
-                      onClick={() =>
-                        paginate(Math.min(totalPages, currentPage + 1))
-                      }
-                      className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
-                      disabled={currentPage === totalPages}
-                    >
-                      <span className="sr-only">Next</span>
-                      &raquo;
-                    </button>
-                  </nav>
-                </div>
-              </div>
-            </div>
-          )}
+              ))}
+            </tbody>
+          </table>
         </div>
+
+        {/* Pagination */}
+        {filteredResults.length > 0 && (
+          <div className="flex justify-center mt-4">
+            {renderPaginationButtons()}
+          </div>
+        )}
       </div>
     </div>
   );
